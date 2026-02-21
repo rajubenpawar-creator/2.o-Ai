@@ -1,78 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Free Online Tools - Image to PDF, QR Generator, Word Counter</title>
-<meta name="description" content="Free online tools with 3D modern design. Convert images to PDF, generate QR codes and more.">
+  <title>Free Online Tools – Image to PDF, QR, Word Counter | Fast & Unlimited</title>
+  <meta name="description" content="Use our free online tools – Image to PDF, PDF to Image, Image Compressor, QR Generator, and Word Counter without signup. Fast, secure & unlimited usage.">
+  <meta name="keywords" content="free online tools, image to pdf free, pdf to image, free qr generator, word counter, seo friendly tools">
 
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
-<!-- Three.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js for 3D background -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<style>
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-}
-</style>
-
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: white; text-align: center; }
+    canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+    .content { position: relative; z-index: 1; padding: 40px; }
+    nav a { color: white; text-decoration: none; padding: 12px 20px; background: rgba(0,0,0,0.6); border-radius: 8px; margin: 6px; display: inline-block; }
+    nav a:hover { background: rgba(255,255,255,0.3); }
+    section { background: rgba(0,0,0,0.5); padding: 24px; border-radius: 12px; margin-top: 30px; }
+  </style>
 </head>
 <body>
 
 <div class="content">
+  <header>
+    <h1>Free Online Tools</h1>
+    <p>No Signup • Unlimited • Fast and Secure</p>
+  </header>
 
-<header>
-<h1>Free Online Tools</h1>
-<p>No Signup | Unlimited | Fast</p>
-</header>
+  <nav>
+    <a href="tools/image-to-pdf.html">Image to PDF</a>
+    <a href="tools/pdf-to-image.html">PDF to Image</a>
+    <a href="tools/image-compressor.html">Image Compressor</a>
+    <a href="tools/qr-generator.html">QR Generator</a>
+    <a href="tools/word-counter.html">Word Counter</a>
+  </nav>
 
-<nav>
-<a href="tools/image-to-pdf.html">Image to PDF</a>
-<a href="tools/pdf-to-image.html">PDF to Image</a>
-<a href="tools/image-compressor.html">Image Compressor</a>
-<a href="tools/qr-generator.html">QR Generator</a>
-<a href="tools/word-counter.html">Word Counter</a>
-</nav>
+  <section>
+    <h2>About These Free Tools</h2>
+    <p>These tools help you process files instantly in your browser without signup. Convert images to PDF, extract images from PDFs, compress images, generate QR codes, and count words quickly and securely.</p>
+  </section>
 
-<section>
-<h2>Modern Free Tools with 3D Design</h2>
-<p>Fast, secure and SEO optimized tools for daily use.</p>
-</section>
+  <section>
+    <h2>Why Use These Tools?</h2>
+    <ul>
+      <li>100% Free and Unlimited</li>
+      <li>Works on Mobile, Tablet & Laptop</li>
+      <li>Fast Processing Without Uploading to Server (Local Browser)</li>
+      <li>Easy-to-Use UI</li>
+    </ul>
+  </section>
 
-<div class="ad">Ad Space</div>
-
+  <div class="ad">
+    Ad Space — Place your ads here later
+  </div>
 </div>
 
 <script>
-// Scene
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha:true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+  
+  const geometry = new THREE.BufferGeometry();
+  const vertices = [];
+  for (let i = 0; i < 5000; i++) {
+    vertices.push(
+      THREE.MathUtils.randFloatSpread(2000),
+      THREE.MathUtils.randFloatSpread(2000),
+      THREE.MathUtils.randFloatSpread(2000)
+    );
+  }
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  const material = new THREE.PointsMaterial({ color: 0x00ffff });
+  const points = new THREE.Points(geometry, material);
+  scene.add(points);
+  camera.position.z = 500;
+  
+  function animate() {
+    requestAnimationFrame(animate);
+    points.rotation.x += 0.0005;
+    points.rotation.y += 0.0005;
+    renderer.render(scene, camera);
+  }
+  animate();
 
-// Geometry
-const geometry = new THREE.BufferGeometry();
-const vertices = [];
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+</script>
 
-for (let i = 0; i < 5000; i++) {
-  vertices.push(
-    THREE.MathUtils.randFloatSpread(2000),
-    THREE.MathUtils.randFloatSpread(2000),
-    THREE.MathUtils.randFloatSpread(2000)
-  );
-}
-
-geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-
-const material = new THREE.PointsMaterial({ color
+</body>
+</html>
