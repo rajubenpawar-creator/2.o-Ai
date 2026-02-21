@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Free Image Compressor</title>
+<meta name="description" content="Compress images online without losing quality free.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<h1>Image Compressor</h1>
+<input type="file" id="imageInput" accept="image/*">
+<button onclick="compressImage()">Compress</button>
+<br><br>
+<img id="output" width="300">
+
+<script>
+function compressImage(){
+const file=document.getElementById("imageInput").files[0];
+const reader=new FileReader();
+reader.onload=function(e){
+const img=new Image();
+img.src=e.target.result;
+img.onload=function(){
+const canvas=document.createElement("canvas");
+canvas.width=img.width/2;
+canvas.height=img.height/2;
+const ctx=canvas.getContext("2d");
+ctx.drawImage(img,0,0,canvas.width,canvas.height);
+document.getElementById("output").src=canvas.toDataURL("image/jpeg",0.7);
+}
+}
+reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
