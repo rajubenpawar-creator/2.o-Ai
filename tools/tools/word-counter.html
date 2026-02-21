@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Free Word Counter Online</title>
+<meta name="description" content="Count words and characters instantly online free.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<h1>Word Counter Tool</h1>
+<textarea id="text" rows="6"></textarea>
+<button onclick="countWords()">Count</button>
+<p id="result"></p>
+
+<script>
+function countWords(){
+const text=document.getElementById("text").value;
+const words=text.trim().split(/\s+/).filter(w=>w.length>0);
+document.getElementById("result").innerHTML=
+"Words: "+words.length+" | Characters: "+text.length;
+}
+</script>
+
+</body>
+</html>
