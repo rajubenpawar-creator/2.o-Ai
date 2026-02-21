@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PDF to Image Converter</title>
+<meta name="description" content="Convert PDF pages to images online free.">
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+</head>
+<body>
+
+<h1>PDF to Image Converter</h1>
+<input type="file" id="pdfInput" accept="application/pdf">
+<canvas id="canvas"></canvas>
+
+<script>
+document.getElementById("pdfInput").addEventListener("change", function(e){
+const file=e.target.files[0];
+const reader=new FileReader();
+reader.onload=function(){
+const typedarray=new Uint8Array(this.result);
+pdfjsLib.getDocument(typedarray).promise.then(function(pdf){
+pdf.getPage(1).then(function(page){
+const viewport=page.getViewport({scale:1});
+const canvas=document.getElementById('canvas');
+const context=canvas.getContext('2d');
+canvas.height=viewport.height;
+canvas.width=viewport.width;
+page.render({canvasContext:context,viewport:viewport});
+});
+});
+};
+reader.readAsArrayBuffer(file);
+});
+</script>
+
+</body>
+</html>
