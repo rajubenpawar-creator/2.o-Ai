@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Free Image to PDF Converter - No Signup</title>
+<meta name="description" content="Convert JPG or PNG images to PDF online free without registration.">
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<h1>Image to PDF Converter</h1>
+<input type="file" id="imageInput" multiple accept="image/*">
+<button onclick="convertToPDF()">Convert</button>
+
+<script>
+async function convertToPDF() {
+const { jsPDF } = window.jspdf;
+const files = document.getElementById("imageInput").files;
+if(files.length==0){alert("Select image"); return;}
+const pdf = new jsPDF();
+
+for(let i=0;i<files.length;i++){
+  const reader=new FileReader();
+  await new Promise(res=>{
+    reader.onload=e=>{
+      pdf.addImage(e.target.result,'JPEG',10,10,180,160);
+      if(i<files.length-1) pdf.addPage();
+      res();
+    }
+    reader.readAsDataURL(files[i]);
+  });
+}
+pdf.save("converted.pdf");
+}
+</script>
+
+</body>
+</html>
