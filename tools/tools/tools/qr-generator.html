@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Free QR Code Generator</title>
+<meta name="description" content="Generate QR codes for URLs and text instantly free.">
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<h1>QR Code Generator</h1>
+<input type="text" id="qrText" placeholder="Enter text or URL">
+<button onclick="generateQR()">Generate</button>
+<div id="qrcode"></div>
+
+<script>
+function generateQR(){
+document.getElementById("qrcode").innerHTML="";
+new QRCode(document.getElementById("qrcode"),
+document.getElementById("qrText").value);
+}
+</script>
+
+</body>
+</html>
